@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="POST">
+        <input type="text" name="loopvalue">
+        <input type="submit">
+    </form>
+
+    <!-- リストに入った物を表示 -->
+    % for item in items:
+    {{ item }}
+    <br/>
+    % end
+
+</body>
+</html>
