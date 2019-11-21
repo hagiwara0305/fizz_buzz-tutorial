@@ -1,30 +1,21 @@
 from bottle import route, run, template, post, request
+from fizz_buzz import Controller
+
+fizz_buzz_object = Controller()
 
 # indexページ
 @route('/')
 def index():
-    return template('index.html', items=getItems())
+    return template('index.html', items=fizz_buzz_object.get_items())
 
 @post('/')
 def item_post():
     loop_value = request.forms.get('loopvalue')
     print(loop_value)
-    return template('index.html', items=getItems(int(loop_value)))
-
-# fizzbuzzを返す
-def getItems(value=100):
-    items = []
-
-    for n in range(1, value + 1):
-        if n % 3 == 0 and n % 5 == 0:
-            items.append("FizzBuzz")
-        elif n % 3 == 0:
-            items.append("Fizz")
-        elif n % 5 == 0:
-            items.append("Buzz")
-        else:
-            items.append(n)
-    return items
+    try:
+        return template('index.html', items=fizz_buzz_object.get_items(int(loop_value)))
+    except:
+        return "<p>500 Error</p><a href="">Index前の画面に戻る</a>"
 
 # webサーバ実行
 run(host='localhost', port=8080, debug=True, reloader=True)
